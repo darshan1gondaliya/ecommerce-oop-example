@@ -55,15 +55,54 @@ router.post("/orders", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-
-// Get order total
-router.get("/order/:id/total", async (req, res) => {
+// Get Order by ID
+router.get("/order/:id", async (req, res) => {
   try {
-    const total = await OrderService.calculateOrderTotal(req.params.id);
-    res.status(200).json({ total });
+    const order = await OrderService.getOrderById(req.params.id);
+    if (!order) {
+      return res.status(404).json({ message: "Order not found" });
+    }
+    res.status(200).json(order);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
+
+// Get All Orders
+router.get("/orders", async (req, res) => {
+  try {
+    const orders = await OrderService.getAllOrders();
+    res.status(200).json(orders);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Update Order
+router.put("/order/:id", async (req, res) => {
+  try {
+    const updatedOrder = await OrderService.updateOrder(req.params.id, req.body);
+    if (!updatedOrder) {
+      return res.status(404).json({ message: "Order not found" });
+    }
+    res.status(200).json(updatedOrder);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Delete Order
+router.delete("/order/:id", async (req, res) => {
+  try {
+    const isDeleted = await OrderService.deleteOrder(req.params.id);
+    if (!isDeleted) {
+      return res.status(404).json({ message: "Order not found" });
+    }
+    res.status(200).json({ message: "Order deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 
 module.exports = router;
