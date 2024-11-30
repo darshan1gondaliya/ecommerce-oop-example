@@ -1,85 +1,127 @@
 {
-    "info": {
-      "name": "E-Commerce API",
-      "description": "Postman collection to test the E-Commerce API using MongoDB and Node.js.",
-      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  "info": {
+    "name": "Order and Product APIs",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Order APIs",
+      "item": [
+        {
+          "name": "Create Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customer\": \"John Doe\",\n  \"products\": [\"64e1f8b2c5fbbd71d4b10a99\", \"64e1f8b2c5fbbd71d4b10b00\"],\n  \"total\": 100\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/orders",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "orders"]
+            }
+          }
+        },
+        {
+          "name": "Get Order by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/orders/:id",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "orders", ":id"]
+            }
+          }
+        },
+        {
+          "name": "Get All Orders",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/orders",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "orders"]
+            }
+          }
+        },
+        {
+          "name": "Update Order",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customer\": \"Jane Doe\",\n  \"total\": 150\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/orders/:id",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "orders", ":id"]
+            }
+          }
+        },
+        {
+          "name": "Delete Order",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/orders/:id",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "orders", ":id"]
+            }
+          }
+        }
+      ]
     },
-    "item": [
-      {
-        "name": "Create Product",
-        "request": {
-          "method": "POST",
-          "header": [
-            {
-              "key": "Content-Type",
-              "value": "application/json",
-              "type": "text"
+    {
+      "name": "Product APIs",
+      "item": [
+        {
+          "name": "Get Single Product",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/products/:id",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "products", ":id"]
             }
-          ],
-          "body": {
-            "mode": "raw",
-            "raw": "{\n  \"name\": \"Sample Product\",\n  \"price\": 99.99\n}"
-          },
-          "url": {
-            "raw": "http://localhost:3000/api/product",
-            "protocol": "http",
-            "host": ["localhost"],
-            "port": "3000",
-            "path": ["api", "product"]
           }
         },
-        "response": []
-      },
-      {
-        "name": "Create Order",
-        "request": {
-          "method": "POST",
-          "header": [
-            {
-              "key": "Content-Type",
-              "value": "application/json",
-              "type": "text"
+        {
+          "name": "Get Multiple Products",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/products?page=1&limit=10&sort=name&order=asc",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "products"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "10" },
+                { "key": "sort", "value": "name" },
+                { "key": "order", "value": "asc" }
+              ]
             }
-          ],
-          "body": {
-            "mode": "raw",
-            "raw": "{\n  \"productIds\": [\n    \"{{productId}}\"\n  ]\n}"
-          },
-          "url": {
-            "raw": "http://localhost:3000/api/order",
-            "protocol": "http",
-            "host": ["localhost"],
-            "port": "3000",
-            "path": ["api", "order"]
           }
-        },
-        "response": []
-      },
-      {
-        "name": "Get Order Total",
-        "request": {
-          "method": "GET",
-          "header": [],
-          "url": {
-            "raw": "http://localhost:3000/api/order/{{orderId}}/total",
-            "protocol": "http",
-            "host": ["localhost"],
-            "port": "3000",
-            "path": ["api", "order", "{{orderId}}", "total"]
-          }
-        },
-        "response": []
-      }
-    ],
-    "variable": [
-      {
-        "key": "productId",
-        "value": ""
-      },
-      {
-        "key": "orderId",
-        "value": ""
-      }
-    ]
-  }
-  
+        }
+      ]
+    }
+  ]
+}
