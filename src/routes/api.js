@@ -48,15 +48,15 @@ router.get("/products", async (req, res) => {
 // Create an order
 router.post("/orders", async (req, res) => {
   try {
-    const { products } = req.body;
-    const order = await OrderService.createOrder(products);
+    const { customer, products, total } = req.body;
+    const order = await OrderService.createOrder(customer, products, total);
     res.status(201).json(order);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 // Get Order by ID
-router.get("/order/:id", async (req, res) => {
+router.get("/orders/:id", async (req, res) => {
   try {
     const order = await OrderService.getOrderById(req.params.id);
     if (!order) {
@@ -79,7 +79,7 @@ router.get("/orders", async (req, res) => {
 });
 
 // Update Order
-router.put("/order/:id", async (req, res) => {
+router.put("/orders/:id", async (req, res) => {
   try {
     const updatedOrder = await OrderService.updateOrder(req.params.id, req.body);
     if (!updatedOrder) {
@@ -92,7 +92,7 @@ router.put("/order/:id", async (req, res) => {
 });
 
 // Delete Order
-router.delete("/order/:id", async (req, res) => {
+router.delete("/orders/:id", async (req, res) => {
   try {
     const isDeleted = await OrderService.deleteOrder(req.params.id);
     if (!isDeleted) {

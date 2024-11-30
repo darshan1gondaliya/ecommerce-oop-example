@@ -2,13 +2,19 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const OrderSchema = new Schema({
+  customer: { type: String, required: true },
+  total: { type: Number, required: true },
+  status: { type: String, default: "Pending" },
+
   products: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Product',
       required: true
     }
-  ]
+  ],
+  createdAt: { type: Date, default: Date.now },
+
 });
 
 // Calculate total price of the order
