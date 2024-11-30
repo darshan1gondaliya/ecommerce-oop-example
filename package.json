@@ -1,0 +1,17 @@
+{
+    "name": "ecommerce-oop-example",
+    "version": "1.0.0",
+    "description": "A Node.js project demonstrating OOP concepts.",
+    "main": "src/app.js",
+    "scripts": {
+        "start": "node src/app.js",
+        "test": "jest"
+    },
+    "dependencies": {
+        "express": "^4.21.1",
+        "mongoose": "^8.8.3"
+    },
+    "devDependencies": {
+        "jest": "^29.0.0"
+    }
+}

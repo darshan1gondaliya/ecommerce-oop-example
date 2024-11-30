@@ -1,0 +1,85 @@
+{
+    "info": {
+      "name": "E-Commerce API",
+      "description": "Postman collection to test the E-Commerce API using MongoDB and Node.js.",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Create Product",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "type": "text"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"name\": \"Sample Product\",\n  \"price\": 99.99\n}"
+          },
+          "url": {
+            "raw": "http://localhost:3000/api/product",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "3000",
+            "path": ["api", "product"]
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Create Order",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "type": "text"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"productIds\": [\n    \"{{productId}}\"\n  ]\n}"
+          },
+          "url": {
+            "raw": "http://localhost:3000/api/order",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "3000",
+            "path": ["api", "order"]
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Get Order Total",
+        "request": {
+          "method": "GET",
+          "header": [],
+          "url": {
+            "raw": "http://localhost:3000/api/order/{{orderId}}/total",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "3000",
+            "path": ["api", "order", "{{orderId}}", "total"]
+          }
+        },
+        "response": []
+      }
+    ],
+    "variable": [
+      {
+        "key": "productId",
+        "value": ""
+      },
+      {
+        "key": "orderId",
+        "value": ""
+      }
+    ]
+  }
+  
